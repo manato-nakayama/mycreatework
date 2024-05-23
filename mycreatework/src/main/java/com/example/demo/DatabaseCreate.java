@@ -18,7 +18,7 @@ public class DatabaseCreate implements InitializingBean {
 	}
 
 	private void initializeDatabase() {
-		// テーブルが存在するか確認して、存在する場合は削除する
+		// logテーブルが存在するか確認して、存在する場合は削除する
 		if (checkTableExists("log")) {
 			dropTable();
 			createTable();
@@ -27,6 +27,7 @@ public class DatabaseCreate implements InitializingBean {
 		}
 	}
 
+	//テーブルが存在するかチェックする
 	private boolean checkTableExists(String tableName) {
 		String query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = ?";
 		int count = jdbcTemplate.queryForObject(query, Integer.class, tableName);
